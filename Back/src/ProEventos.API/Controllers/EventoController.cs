@@ -13,7 +13,6 @@ namespace ProEventos.API.Controllers
     [Route("api/[controller]")]
     public class EventoController : ControllerBase
     {
-
         private readonly DataContext _context;
         
         public EventoController(DataContext context)
@@ -32,5 +31,14 @@ namespace ProEventos.API.Controllers
         {
             return _context.Eventos.FirstOrDefault(x => x.EventoId == id);             
         }
+
+        [HttpPost]
+        public string Post(Evento evento)
+        {
+            _context.Eventos.Add(evento);
+            _context.SaveChanges();
+            return "ok";
+        }
+
     }
 }
