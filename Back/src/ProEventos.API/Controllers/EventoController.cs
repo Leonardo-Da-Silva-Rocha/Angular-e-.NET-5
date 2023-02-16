@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using ProEventos.API.Data;
 using ProEventos.API.Models;
 
@@ -39,6 +36,5 @@ namespace ProEventos.API.Controllers
             _context.SaveChanges();
             return "ok";
         }
-
     }
 }
