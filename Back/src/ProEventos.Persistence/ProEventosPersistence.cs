@@ -68,7 +68,7 @@ namespace ProEventos.Persistence
 
             query = query.OrderBy(e => e.Id);
 
-            return await query.Where(e => e.Tema.Contains(tema)).ToArrayAsync();
+            return await query.Where(e => e.Tema.ToLower().Contains(tema)).ToArrayAsync();
         }
 
         public async Task<Palestrante> GetAllPalestranteByIdAsync(int PalestranteId, bool includeEventos = false)
@@ -93,10 +93,10 @@ namespace ProEventos.Persistence
 
             query = query.OrderBy(p => p.Id);
 
-            return await query.Where(p => p.Nome.Contains(nome)).ToArrayAsync();
+            return await query.Where(p => p.Nome.ToLower().Contains(nome)).ToArrayAsync();
         }
 
-        public async Task<Evento[]> GetAllEventosAsync(string tema, bool includePalestrantes)
+        public async Task<Evento[]> GetAllEventosAsync(bool includePalestrantes)
         {
             IQueryable<Evento> query = _context.Eventos //cria a query e adiciona o lote e a rede social no select
             .Include(e => e.Lote)
@@ -110,7 +110,7 @@ namespace ProEventos.Persistence
             return await query.ToArrayAsync(); // traz todos eventos ordenados por id
         }
 
-        public async Task<Palestrante[]> GetAllPalestrantesAsync(string nome, bool includeEventos)
+        public async Task<Palestrante[]> GetAllPalestrantesAsync(bool includeEventos)
         {
              IQueryable<Palestrante> query = _context.Palestrantes
             .Include(p => p.RedeSocials);
